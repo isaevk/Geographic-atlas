@@ -12,6 +12,4 @@ struct URLs {
   static let base = "https://restcountries.com/v3.1/"
   /// Get all countries
   static let allCountries = "all"
-  /// Get country by cca2 code
-  static let byCode = "alpha/[ssa2_code]"
 }

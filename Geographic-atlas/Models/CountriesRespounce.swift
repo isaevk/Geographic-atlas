@@ -8,23 +8,53 @@
 import Foundation
 
 // MARK: - Countries Respounce
-struct CountriesRespounce: Codable {
-  let countries: [Country]
-}
+typealias CountriesRespounce = [Country]
 
 // MARK: - Country
 struct Country: Codable {
-  let name: Name?
-  let population: Int?
-  let area: Double?
+  let name: Name
+  let population: Int
+  let area: Double
   let currencies: Currencies?
-  let region: Region?
+  let region: Region
   let capital: [String]?
-  let timezones: [String]?
-  let flag: String?
-  let flags: Flags?
-  let capitalInfo: CapitalInfo?
+  let timezones: [String]
+  let flag: String
+  let flags: Flags
+  let capitalInfo: CapitalInfo
   let subregion: String?
+}
+
+// MARK: - CapitalInfo
+struct CapitalInfo: Codable {
+  let latlng: [Double]?
+}
+
+// MARK: - Car
+struct Car: Codable {
+  let signs: [String]?
+  let side: Side
+}
+
+enum Side: String, Codable {
+  case sideLeft = "left"
+  case sideRight = "right"
+}
+
+// MARK: - CoatOfArms
+struct CoatOfArms: Codable {
+  let png: String?
+  let svg: String?
+}
+
+enum Continent: String, Codable {
+  case africa = "Africa"
+  case antarctica = "Antarctica"
+  case asia = "Asia"
+  case europe = "Europe"
+  case northAmerica = "North America"
+  case oceania = "Oceania"
+  case southAmerica = "South America"
 }
 
 // MARK: - Currencies
@@ -72,44 +102,248 @@ struct Currencies: Codable {
   let zwl, awg, bnd, lak: Aed?
   let top, lsl, sos, sll: Aed?
   let bif, etb, cny: Aed?
+  
+  enum CodingKeys: String, CodingKey {
+    case eur
+    case afn
+    case sdg
+    case bgn
+    case usd
+    case pln
+    case nzd
+    case tzs
+    case mop
+    case xof
+    case czk
+    case ugx
+    case ttd
+    case dzd
+    case uah
+    case mru
+    case gel
+    case ang
+    case nad
+    case zar
+    case mkd
+    case mur
+    case aud
+    case kid
+    case xaf
+    case qar
+    case kyd
+    case bwp
+    case egp
+    case ils
+    case jod
+    case vnd
+    case gbp
+    case jep
+    case gyd
+    case tvd
+    case pgk
+    case bsd
+    case cve
+    case omr
+    case ves
+    case bob
+    case cad
+    case nok
+    case kgs
+    case amd
+    case cdf
+    case chf
+    case szl
+    case dkk
+    case fok
+    case ngn
+    case mwk
+    case stn
+    case fkp
+    case gtq
+    case bbd
+    case ghs
+    case nio
+    case imp
+    case aoa
+    case dop
+    case all
+    case lyd
+    case kwd
+    case bhd
+    case tmt
+    case lrd
+    case rub
+    case php
+    case xcd
+    case ron
+    case inr
+    case mmk
+    case bzd
+    case mnt
+    case sar
+    case huf
+    case ars
+    case xpf
+    case yer
+    case sek
+    case shp
+    case brl
+    case ssp
+    case thb
+    case currenciesTRY
+    case bmd
+    case bdt
+    case sgd
+    case mdl
+    case kes
+    case uyu
+    case byn
+    case lbp
+    case btn
+    case myr
+    case kzt
+    case tnd
+    case gmd
+    case syp
+    case gnf
+    case mzn
+    case wst
+    case twd
+    case kpw
+    case djf
+    case srd
+    case rwf
+    case krw
+    case jmd
+    case mvr
+    case pyg
+    case idr
+    case mga
+    case iqd
+    case hnl
+    case mad
+    case hkd
+    case lkr
+    case htg
+    case cuc
+    case cup
+    case tjs
+    case ckd
+    case cop
+    case uzs
+    case gip
+    case pen
+    case pkr
+    case clp
+    case zmw
+    case scr
+    case crc
+    case kmf
+    case isk
+    case jpy
+    case fjd
+    case bam
+    case mxn
+    case khr
+    case irr
+    case rsd
+    case aed
+    case azn
+    case vuv
+    case ern
+    case npr
+    case pab
+    case ggp
+    case sbd
+    case zwl
+    case awg
+    case bnd
+    case lak
+    case top
+    case lsl
+    case sos
+    case sll
+    case bif
+    case etb
+    case cny
+  }
 }
 
 // MARK: - Aed
 struct Aed: Codable {
-  let name, symbol: String?
+  let name, symbol: String
 }
 
 // MARK: - BAM
 struct BAM: Codable {
-  let name: String?
+  let name: String
 }
 
-// MARK: - Name
-struct Name: Codable {
-  let common: String?
+// MARK: - Demonyms
+struct Demonyms: Codable {
+  let eng: Eng
+  let fra: Eng?
 }
 
-// MARK: - Translation
-struct Translation: Codable {
-  let official, common: String?
+// MARK: - Eng
+struct Eng: Codable {
+  let f, m: String
 }
 
 // MARK: - Flags
 struct Flags: Codable {
-  let png: String?
+  let png: String
+  let svg: String
+  let alt: String?
 }
 
-// MARK: - CapitalInfo
-struct CapitalInfo: Codable {
-  let latlng: [Double]?
+// MARK: - Idd
+struct Idd: Codable {
+  let root: String?
+  let suffixes: [String]?
+}
+
+// MARK: - Maps
+struct Maps: Codable {
+  let googleMaps, openStreetMaps: String
+}
+
+// MARK: - Name
+struct Name: Codable {
+  let common, official: String
+  let nativeName: [String: Translation]?
+}
+
+// MARK: - Translation
+struct Translation: Codable {
+  let official, common: String
+}
+
+// MARK: - PostalCode
+struct PostalCode: Codable {
+  let format: String
+  let regex: String?
 }
 
 // MARK: - Region
-enum Region: Codable {
-  case africa
-  case americas
-  case antarctic
-  case asia
-  case europe
-  case oceania
+enum Region: String, Codable {
+  case africa = "Africa"
+  case americas = "Americas"
+  case antarctic = "Antarctic"
+  case asia = "Asia"
+  case europe = "Europe"
+  case oceania = "Oceania"
+}
+
+// MARK: - StartOfWeek
+enum StartOfWeek: String, Codable {
+  case monday = "monday"
+  case saturday = "saturday"
+  case sunday = "sunday"
+}
+
+// MARK: - Status
+enum Status: String, Codable {
+  case officiallyAssigned = "officially-assigned"
+  case userAssigned = "user-assigned"
 }
